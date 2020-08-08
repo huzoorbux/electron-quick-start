@@ -13,7 +13,7 @@ function createWindow () {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadURL('https://www.knsinstitute.com/yt.php')
+  mainWindow.loadURL('https://accounts.google.com/login')
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
