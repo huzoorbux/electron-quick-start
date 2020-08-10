@@ -1,19 +1,24 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow} = require('electron')
 const path = require('path')
-
+app.userAgentFallback = app.userAgentFallback.replace('Electron/' + process.versions.electron, '');
 function createWindow () {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      enableRemoteModule: true,
+      nodeIntegration: false,
+      nativeWindowOpen: true,
+      webSecurity: true,
+      allowRunningInsecureContent: true
     }
   })
-
+  
   // and load the index.html of the app.
-  mainWindow.loadURL('https://accounts.google.com/login')
+  // mainWindow.loadURL('https://www.whatismybrowser.com/', { userAgent: 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:46.0) Gecko/20100101 Firefox/46.0' })
+  mainWindow.loadURL('https://myinteracademy.com/test-page/', { userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36' })
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -22,6 +27,8 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
+console.log(app.userAgentFallback);
+
 app.whenReady().then(() => {
   createWindow()
   
